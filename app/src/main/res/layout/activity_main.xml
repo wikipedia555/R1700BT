@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toptop"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/backGround">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_above="@id/second"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/on_off_switch"
+            android:theme="@style/MySwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:thumbTint="#000000"
+            android:trackTint="#ffffff"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="40dp"
+            android:textOff="OFF"
+            android:textOn="ON"
+            app:showText="true"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Vibration"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff"
+            android:layout_below="@id/on_off_switch"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+
+        <ImageButton
+            android:id="@+id/mute"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/mutebutton"
+            android:layout_margin="10dp"/>
+        <ImageButton
+            android:id="@+id/plus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/plusbutton"
+            android:layout_margin="10dp"/>
+        <ImageButton
+            android:id="@+id/minus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/minusbutton"
+            android:layout_margin="10dp"/>
+        <ImageButton
+            android:id="@+id/bluetooth"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bluetoothbutton"
+            android:layout_margin="10dp"/>
+        <ImageButton
+            android:id="@+id/linein"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/lineinbuttom"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
