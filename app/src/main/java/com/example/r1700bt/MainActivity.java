@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -52,41 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 state = isChecked;
             }
 
-        });
-        volumePlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    if(state == true) {
-                        v.vibrate(vibratemilsec);
-                    }
-                    consumerIrManager.transmit(frequency, vplus);
-                }
-                catch(UnsupportedOperationException e)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            errIr, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
-        });
-
-        volumeMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    if(state == true) {
-                        v.vibrate(vibratemilsec);
-                    }
-                    consumerIrManager.transmit(frequency, vminus);
-                }
-                catch(UnsupportedOperationException e)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            errIr, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
         });
 
         bluetooth.setOnClickListener(new View.OnClickListener() {
@@ -142,5 +109,125 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        volumePlus.setOnTouchListener(new View.OnTouchListener() {
+
+            private Handler mHandler;
+
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (mHandler != null) return true;
+                        mHandler = new Handler();
+                        vibro.run();
+                        mHandler.postDelayed(mAction, 500);
+                        Log.e("DOWN","DOWN");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (mHandler == null) return true;
+                        mHandler.removeCallbacks(mAction);
+                        Log.e("UP","UP");
+                        mHandler = null;
+                        break;
+                }
+                return false;
+            }
+
+            Runnable mAction = new Runnable() {
+                @Override public void run() {
+                    System.out.println("Performing action...");
+                    try {
+                        consumerIrManager.transmit(frequency, vplus);
+                    }
+                    catch(UnsupportedOperationException e)
+                    {
+
+                    }
+                    mHandler.postDelayed(this, 500);
+                }
+            };
+
+            Runnable vibro = new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("Vibrate","VIBRO");
+                    Log.e("BUT","WORK");
+                    try {
+                        if(state == true) {
+                            v.vibrate(vibratemilsec);
+                        }
+                        consumerIrManager.transmit(frequency, vplus);
+                    }
+                    catch(UnsupportedOperationException e)
+                    {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                errIr, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+            };
+
+        });
+
+        volumeMinus.setOnTouchListener(new View.OnTouchListener() {
+
+            private Handler mHandler;
+
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (mHandler != null) return true;
+                        mHandler = new Handler();
+                        vibro.run();
+                        mHandler.postDelayed(mAction, 500);
+                        Log.e("DOWN","DOWN");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (mHandler == null) return true;
+                        mHandler.removeCallbacks(mAction);
+                        Log.e("UP","UP");
+                        mHandler = null;
+                        break;
+                }
+                return false;
+            }
+
+            Runnable mAction = new Runnable() {
+                @Override public void run() {
+                    System.out.println("Performing action...");
+                    try {
+                        consumerIrManager.transmit(frequency, vminus);
+                    }
+                    catch(UnsupportedOperationException e)
+                    {
+
+                    }
+                    mHandler.postDelayed(this, 500);
+                }
+            };
+
+            Runnable vibro = new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("Vibrate","VIBRO");
+                    Log.e("BUT","WORK");
+                    try {
+                        if(state == true) {
+                            v.vibrate(vibratemilsec);
+                        }
+                        consumerIrManager.transmit(frequency, vminus);
+                    }
+                    catch(UnsupportedOperationException e)
+                    {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                errIr, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+            };
+
+        });
+
+
     }
 }
