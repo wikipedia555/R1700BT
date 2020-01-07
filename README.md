@@ -9,7 +9,7 @@ Installation Instructions and Specifications
 * phone with ir port
 
 **Install:**
-To install, you need to download the .apk file from the folder [click](https://github.com/wikipedia555/R1700BT/tree/master/app/release) and installing to yout device .
+To install, you need to download the .apk file [click](https://github.com/wikipedia555/R1700BT/raw/master/app-debug.apk) and installing to yout device .
 
 You can also download the project, and assemble it in an android studio with all the necessary parameters and changes.
 
